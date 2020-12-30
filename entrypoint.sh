@@ -199,7 +199,7 @@ commit=$(git rev-parse HEAD)
 # push new tag the current branch
 new="${tag_prefix}v${MAJOR_VERSION}.${count_commits}"
 echo "new version: $new"
-echo ::set-output name=tag::$new
+
 
 # create local git tag
 git tag $new
@@ -227,6 +227,7 @@ git_ref_posted=$( echo "${git_refs_response}" | jq .ref | tr -d '"' )
 
 echo "::debug::${git_refs_response}"
 if [ "${git_ref_posted}" = "refs/tags/${new}" ]; then
+  echo ::set-output name=tag::${new}
   exit 0
 else
   echo "::error::Tag was not created properly."
