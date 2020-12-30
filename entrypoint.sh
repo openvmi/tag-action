@@ -37,17 +37,17 @@ if [[ ! -f "version" ]];then
     exit 1
 fi
 
-base_version=$(cat version)
-echo "base version: ${base_version}"
+MAJOR_VERSION=$(cat version)
+echo "Major Version: ${MAJOR_VERSION}"
 
 if [[ "${current_branch}" == "master" ]] || [[ "${current_branch}" == "main" ]]; then
-    tag_prefix="release-"
+    tag_prefix="Production-"
 else
     tag_prefix="${current_branch}-"
 fi
 echo  "tag_prefix: ${tag_prefix}"
 
-base_tag="${tag_prefix}v${base_version}.0"
+base_tag="${tag_prefix}v${MAJOR_VERSION}.0"
 echo "base tag: ${base_tag}"
 
 
@@ -197,7 +197,7 @@ commit=$(git rev-parse HEAD)
 
 
 # push new tag the current branch
-new="${tag_prefix}v${base_version}.${count_commits}"
+new="${tag_prefix}v${MAJOR_VERSION}.${count_commits}"
 echo "new version: $new"
 echo ::set-output name=tag::$new
 
