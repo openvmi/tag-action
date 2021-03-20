@@ -13,6 +13,7 @@ initial_version=${INITIAL_VERSION:-0.0.0}
 tag_context=${TAG_CONTEXT:-repo}
 suffix=${PRERELEASE_SUFFIX:-beta}
 verbose=${VERBOSE:-true}
+master_prefix=${MASTER_PREFIX:-Production-}
 
 cd ${GITHUB_WORKSPACE}/${source}
 
@@ -41,7 +42,7 @@ MAJOR_VERSION=$(cat version)
 echo "Major Version: ${MAJOR_VERSION}"
 
 if [[ "${current_branch}" == "master" ]] || [[ "${current_branch}" == "main" ]]; then
-    tag_prefix="Production-"
+    tag_prefix=${master_prefix}
 else
     tag_prefix="${current_branch}-"
 fi
